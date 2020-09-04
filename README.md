@@ -18,6 +18,9 @@
 ### Ranking
 ![ranking](https://user-images.githubusercontent.com/21326503/92205882-87a41e00-eec1-11ea-9087-8fd39e9bb08d.png)
 
+## Development Environment
+- Languages : python 
+- Frameworks : tensorflow
 
-### Developer
+## Developer
 - Hyeji Oh
