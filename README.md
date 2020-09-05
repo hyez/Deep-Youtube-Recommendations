@@ -7,7 +7,9 @@
 	- [MovieLens](https://grouplens.org/datasets/movielens/)
 
 ## Run Code
-` python train.py `
+``` 
+python train.py 
+```
 
 ## Model
 <img width="713" alt="Model" src="https://user-images.githubusercontent.com/21326503/92299733-0f585e00-ef90-11ea-9422-9299729d03a1.png">
