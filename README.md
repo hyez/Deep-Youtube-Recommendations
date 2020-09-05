@@ -10,13 +10,14 @@
 ` python train.py `
 
 ## Model
-![model](https://user-images.githubusercontent.com/21326503/92205829-6e02d680-eec1-11ea-99a9-f0267875265a.png)
+<img width="713" alt="Model" src="https://user-images.githubusercontent.com/21326503/92299733-0f585e00-ef90-11ea-9422-9299729d03a1.png">
 
 ### Candidate Generation
-![can](https://user-images.githubusercontent.com/21326503/92205879-8541c400-eec1-11ea-9172-745d3e0c87e0.png)
+<img width="773" alt="Candidate Generation" src="https://user-images.githubusercontent.com/21326503/92299725-fd76bb00-ef8f-11ea-82c3-a1e6a15f65ad.png">
 
 ### Ranking
-![ranking](https://user-images.githubusercontent.com/21326503/92205882-87a41e00-eec1-11ea-9087-8fd39e9bb08d.png)
+<img width="1440" alt="Ranking" src="https://user-images.githubusercontent.com/21326503/92299749-33b43a80-ef90-11ea-8d79-619a2a9ffa85.png">
+
 
 ## Development Environment
 - Languages : python 
