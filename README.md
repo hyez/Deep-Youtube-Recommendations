@@ -16,7 +16,7 @@
 <img width="773" alt="Candidate Generation" src="https://user-images.githubusercontent.com/21326503/92299725-fd76bb00-ef8f-11ea-82c3-a1e6a15f65ad.png">
 
 ### Ranking
-<img width="773" alt="스크린샷 2020-09-05 오후 3 55 12" src="https://user-images.githubusercontent.com/21326503/92299764-60685200-ef90-11ea-8389-2fa514124aae.png">
+<img width="518" alt="스크린샷 2020-09-05 오후 3 55 12" src="https://user-images.githubusercontent.com/21326503/92299764-60685200-ef90-11ea-8389-2fa514124aae.png">
 
 
 
