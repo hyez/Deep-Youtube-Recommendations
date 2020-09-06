@@ -126,3 +126,54 @@ class Dataset(object):
 			self.data = user_movie_list[(user_movie_list.user >= 6)&
 		                                  (user_movie_list.user <= 10)]
 
+
+	def preprocess_ranking(self, k):
+		movie_data = self.movies.set_index(['movie_id']).sort_index()
+		movie_data = movie_data.loc[k+1]
+		movie_data["title_d"] = movie_data["title"].map(title2title_encoded)
+
+		ratings_cols = ['user_id', 'movie_id', 'rating', 'unix_timestamp']
+		ratings = pd.read_csv(
+		'data/u.data', sep='\t', names=ratings_cols, encoding='latin-1')
+
+		utils.get_genres(movie_data, self.genre_cols)
+
+		new_data = movie_data.merge(ratings, on='movie_id') # rating 추가
+
+		genre_occurences = new_data[genre_cols].sum().to_dict()
+		genres_encoded = {x: i for i, x in enumerate(self.genre_cols)}
+
+
+		new_data = new_data[['movie_id', 'user_id', 'rating', 'unix_timestamp', 'all_genres', 'title_d']]
+		new_data['movie_type'] = np.where(new_data['rating'] >= 3, 'like', 'dislike') # 3보다 크면 like
+
+
+		genre_list = new_data.groupby(['user_id'])['all_genres'].unique().apply(list).reset_index()
+		genre_list['all_genres']=genre_list['all_genres'].apply(lambda x: list(set(','.join(x))) ) # 중복제거
+		genre_list['all_genres']=genre_list['all_genres'].apply(lambda x:[ x for x in x if x.isdigit() ])
+
+		new_data = normalize_col(new_data, 'unix_timestamp')
+		timestamp_list = new_data.groupby(['user_id'])['unix_timestamp'].unique().apply(list).reset_index()
+
+		title_list = new_data.groupby(['user_id'])['title_d'].apply(list).reset_index()
+		print(title_list)
+		dataset = movie_list.pivot(index='user_id', columns='movie_type', values='movie_id').reset_index()
+		dataset.fillna(new_data["movie_id"].max()+1, inplace=True)
+
+		dataset['like'] =dataset['like'].apply(lambda x: x if type(x) is list else [])
+		dataset['dislike'] =dataset['dislike'].apply(lambda x: x if type(x) is list else [])
+
+		dataset = pd.merge(dataset, title_list, how='left')
+		dataset = pd.merge(dataset, genre_list, how='left')
+		dataset = pd.merge(dataset, timestamp_list, how='left')
+
+		dataset['predict_labels'] = dataset['like'].apply(lambda x: int(random.uniform(1,new_data["movie_id"].max()))) #label을 마지막 값으로..
+
+		dataset['like']=dataset['like'].apply(lambda x: [new_data["movie_id"].max()+1] if x == [] else x)
+		dataset['dislike']=dataset['dislike'].apply(lambda x: [new_data["movie_id"].max()+1] if x == [] else x)
+
+		return dataset[(dataset.user_id >= 1)&
+		                      (dataset.user_id <= 5)]
+		# test_data=dataset[(dataset.user_id >= 6)&
+		#                       (dataset.user_id <= 9)]
+

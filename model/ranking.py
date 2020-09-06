@@ -22,19 +22,19 @@ class Ranking(object):
 
 
 		#--- layers
-		features_embedding_layer = tf.keras.layers.Embedding(input_dim=NUM_CLASSES, output_dim=EMBEDDING_DIMS, 
+		features_embedding_layer = tf.keras.layers.Embedding(input_dim=cfg.NUM_CLASSES, output_dim=cfg.EMBEDDING_DIMS, 
 		                                            mask_zero=True, trainable=True, name='features_embeddings')
-		labels_embedding_layer = tf.keras.layers.Embedding(input_dim=NUM_CLASSES, output_dim=EMBEDDING_DIMS, 
+		labels_embedding_layer = tf.keras.layers.Embedding(input_dim=cfg.NUM_CLASSES, output_dim=cfg.EMBEDDING_DIMS, 
 		                                            mask_zero=True, trainable=True, name='labels_embeddings')
 
 		avg_embeddings = MaskedEmbeddingsAggregatorLayer(agg_mode='mean', name='aggregate_embeddings')
 
-		dense_1 = tf.keras.layers.Dense(units=DENSE_UNITS, name='dense_1')
-		dense_2 = tf.keras.layers.Dense(units=DENSE_UNITS, name='dense_2')
-		dense_3 = tf.keras.layers.Dense(units=DENSE_UNITS, name='dense_3')
+		dense_1 = tf.keras.layers.Dense(units=cfg.DENSE_UNITS, name='dense_1')
+		dense_2 = tf.keras.layers.Dense(units=cfg.DENSE_UNITS, name='dense_2')
+		dense_3 = tf.keras.layers.Dense(units=cfg.DENSE_UNITS, name='dense_3')
 		l2_norm_1 = L2NormLayer(name='l2_norm_1')
 
-		dense_output = tf.keras.layers.Dense(NUM_CLASSES, activation=tf.nn.softmax, name='dense_output')
+		dense_output = tf.keras.layers.Dense(cfg.NUM_CLASSES, activation=tf.nn.softmax, name='dense_output')
 
 		#--- features
 		features_embeddings = features_embedding_layer(input_title)
@@ -80,7 +80,7 @@ class Ranking(object):
 		outputs = dense_output(dense_3_batch_norm)
 
 		#Optimizer
-		optimiser = tf.keras.optimizers.Adam(learning_rate=LEARNING_RATE)
+		optimiser = tf.keras.optimizers.Adam(learning_rate=cfg.LEARNING_RATE)
 
 		#--- prep model
 		model = tf.keras.models.Model(
