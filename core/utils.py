@@ -18,3 +18,7 @@ def get_genres(movies, genres):
 def normalize_col(df,col_name):
 	df[col_name] = (df[col_name] - df[col_name].min()) / (df[col_name].max() - df[col_name].min())
 	return df
+
+
+
+	

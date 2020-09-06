@@ -5,14 +5,14 @@ import sys, os
 sys.path.append(os.pardir)
 
 import core.config as cfg
-from layers import MaskedEmbeddingsAggregatorLayer, L2NormLayer
+from model.layers import MaskedEmbeddingsAggregatorLayer, L2NormLayer
 
-class ranking(object):
-	def __init__(self, input_data, trainable):
+class Ranking(object):
+	def __init__(self, trainable=True):
 
 		self.trainable = trainable
 	
-	def __build_nework(self, input_data):
+	def build_nework(self):
 
 		input_title = tf.keras.Input(shape=(None, ), name='movie_name')
 		inp_video_liked = tf.keras.layers.Input(shape=(None,), name='like')
@@ -96,4 +96,13 @@ class ranking(object):
 		tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
 		model.compile(optimizer=optimiser, loss='sparse_categorical_crossentropy', metrics=['acc'])
 
-		# model.summary()
+		self.model = model
+
+		return model
+
+	def save(self):
+		self.model.save("ranking.h5")
+
+	def summary(self):
+		self.model.summary()
+	

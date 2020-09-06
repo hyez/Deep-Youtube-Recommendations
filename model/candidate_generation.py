@@ -85,6 +85,12 @@ class CandidateGeneration(object):
         tensorboard_callback = tf.keras.callbacks.TensorBoard(logdir, histogram_freq=1)
         model.compile(optimizer=optimiser, loss='sparse_categorical_crossentropy', metrics=['acc'])
 
-        model.summary()
+        self.model = model
 
         return model
+
+    def save(self):
+        self.model.save("candidate_generation.h5")
+
+    def summary(self):
+        self.model.summary()
