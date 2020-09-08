@@ -1,4 +1,5 @@
 # Recommendation system for YouTube Using Deep Learning
+![PyPI - Python Version](https://img.shields.io/pypi/pyversions/scikit-daisy) [![Version](https://img.shields.io/badge/version-v1.0.0-orange)](https://github.com/HYEZ/Deep-Youtube-Recommendations) ![GitHub repo size](https://img.shields.io/github/repo-size/HYEZ/Deep-Youtube-Recommendations)
 
 ## References
 - papers
